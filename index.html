@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>ESPE Search</title>
+    <script type="module" src="/src/espe-search-input.ts"></script>
+    <script type="module" src="src/espe-course-card.ts"></script>
+    <style>
+      body {
+        height: 100vh;
+        place-content: center;
+        place-items: center;
+        font-family: sans-serif;
+        margin: 0;
+      }
+
+      .container {
+        border: solid 3px black;
+        padding: 40px;
+        border-radius: 20px;
+        box-shadow: 10px 5px 10px 5px rgb(69, 69, 69);
+        margin: auto;
+        
+      }
+      .container-courses{
+        display: flex;
+        flex-wrap: wrap;
+        
+
+      }
+
+      section#asignaturas {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        margin-top: 2rem;
+        justify-content: center;
+      }
+
+      espe-course-card {
+        flex: 1 1 250px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>BUSQUEDA ASIGNATURA</h1>
+      <div style="width: 50%;">
+        <espe-search-input
+          theme="#986665"
+          placeholder="Busca la asignatura"
+        ></espe-search-input>
+      </div>
+      <div class="container-courses">
+        <section id="asignaturas">
+          <espe-course-card
+            data-nombre="Investigación"
+            title="Investigación"
+            description="📘 Métodos científicos aplicados"
+            progress="60"
+            progressColor="green"
+            buttonTheme="yellow"
+          ></espe-course-card>
+  
+          <espe-course-card
+            data-nombre="Ingeniería"
+            title="Ingeniería"
+            description="📗 Fundamentos de ingeniería general"
+            progress="70"
+            progressColor="green"
+            buttonTheme="yellow"
+          ></espe-course-card>
+  
+          <espe-course-card
+            data-nombre="Administración"
+            title="Administración"
+            description="📙 Gestión y liderazgo organizacional"
+            progress="40"
+            progressColor="red"
+            buttonTheme="green"
+          ></espe-course-card>
+  
+          <espe-course-card
+            data-nombre="Computación"
+            title="Computación"
+            description="💻 Fundamentos y algoritmos"
+            progress="50"
+            progressColor="green"
+            buttonTheme="yellow"
+          ></espe-course-card>
+  
+          <espe-course-card
+            data-nombre="Biotecnología"
+            title="Biotecnología"
+            description="🧬 Procesos biológicos avanzados"
+            progress="30"
+            progressColor="red"
+            buttonTheme="green"
+          ></espe-course-card>
+        </section>
+      </div>
+    </div>
+
+    <script>
+      const search = document.querySelector("espe-search-input");
+      const cards = document.querySelectorAll("espe-course-card");
+
+      const asignaturas = [
+        "Investigación",
+        "Ingeniería",
+        "Administración",
+        "Computación",
+        "Biotecnología",
+      ];
+      search.suggestions = asignaturas;
+
+      function filtrar(valor) {
+        valor = valor.toLowerCase();
+        cards.forEach((card) => {
+          const nombre = card.dataset.nombre.toLowerCase();
+          card.style.display = nombre.includes(valor) ? "block" : "none";
+        });
+        if (!valor) {
+          cards.forEach((card) => (card.style.display = "block"));
+        }
+      }
+
+      search.addEventListener("sugerencia-seleccionada", (e) => {
+        filtrar(e.detail.value);
+      });
+
+      search.addEventListener("input", (e) => {
+        filtrar(e.target.value);
+      });
+
+      search.addEventListener("buscar-enter", (e) => {
+        search.loading = true;
+        filtrar(e.detail.value);
+        setTimeout(() => {
+          search.loading = false;
+        }, 1000);
+      });
+    </script>
+  </body>
+</html>
