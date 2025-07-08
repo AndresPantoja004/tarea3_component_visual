@@ -43,6 +43,45 @@ El usuario comienza a escribir, el componente `<espe-search-input>` actualiza au
 ### Interacción visual
 
 El componente muestra una animación de carga si el usuario presiona Enter (loading = true) para simular una búsqueda más realista. Luego de 1 segundo, se oculta automáticamente (loading = false). Las tarjetas se mantienen estilizadas con indicadores visuales como colores en la barra de progreso (progressColor) y botones personalizables (buttonTheme).
+
+### Ejemplo HTML de los componentes
+Atributos del componente `<espe-search-input>`
+| Atributo      | Tipo       | Descripción                                      |
+| ------------- | ---------- | ------------------------------------------------ |
+| `theme`       | `string`   | Define el color del borde del campo de entrada.  |
+| `placeholder` | `string`   | Texto guía dentro del campo de búsqueda.         |
+| `suggestions` | `string[]` | Lista de valores sugeridos mientras se escribe.  |
+| `loading`     | `boolean`  | Muestra un ícono de carga cuando está en `true`. |
+| `disabled`    | `boolean`  | Desactiva el campo de entrada si es `true`.      |
+```html
+<!-- Componente de búsqueda -->
+<espe-search-input
+  theme="#986665"
+  placeholder="Busca la asignatura"
+  .suggestions=${["Investigación", "Ingeniería", "Administración", "Computación", "Biotecnología"]}
+></espe-search-input>
+```
+
+Atributos del Componente `<espe-course-card>`
+| Atributo        | Tipo                     | Descripción                                              |
+| --------------- | ------------------------ | -------------------------------------------------------- |
+| `title`         | `string`                 | Título del curso o asignatura.                           |
+| `description`   | `string`                 | Breve descripción del contenido del curso.               |
+| `progress`      | `number`                 | Porcentaje de progreso del curso.                        |
+| `progressColor` | `'green'` \| `'red'`     | Color visual de la barra y la insignia de progreso.      |
+| `buttonTheme`   | `'green'` \| `'yellow'`  | Tema visual del botón "Ver detalles".                    |
+| `data-nombre`   | `string` (atributo HTML) | Usado para comparar en búsquedas y filtrado de tarjetas. |
+```html
+<!-- Tarjetas de asignaturas -->
+<espe-course-card
+  data-nombre="Computación"
+  title="Computación"
+  description="💻 Fundamentos y algoritmos"
+  progress="50"
+  progressColor="green"
+  buttonTheme="yellow"
+></espe-course-card>
+```
 ## Ejemplo de uso en diferentes navegadores
 ### Navegador 1
 ![Navegador 1]()
