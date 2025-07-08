@@ -77,7 +77,6 @@ export class EspeCourseCard extends LitElement {
   .progress-bar {
     height: 4px;
     border-radius: 4px;
-
     margin: 6px 0 12px;
     position: relative;
     overflow: hidden;
