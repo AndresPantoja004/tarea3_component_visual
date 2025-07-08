@@ -6,18 +6,17 @@ Este componente Lit personalizado muestra una tarjeta informativa para asignatur
 
 ## 📸 Vista previa
 
-### 🟢 Progreso verde con botón amarillo
-![Card Verde](docs/card-green-yellow.png)
+### 🟢 Componente aún sin estilos personalizados
+![Card Verde](docs/component-card-!styles.png)
 
-### 🔴 Progreso rojo con botón verde
-![Card Roja](docs/card-red-green.png)
 
 ---
 
 ## 🚀 Instalación
 
-1. Asegúrate de tener un proyecto con soporte para módulos ES (`type="module"`).
-2. Importa el componente:
+1. Instalar dependencias [`npm i  | npm install`]
+2. Asegúrate de tener un proyecto con soporte para módulos ES (`type="module"`).
+3. Importa el componente:
 
 ```html
 <script type="module" src="src/espe-course-card.ts"></script>
