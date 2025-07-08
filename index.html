@@ -6,39 +6,75 @@
     <script type="module" src="src/components/espe-search-input.ts"></script>
     <script type="module" src="src/components/espe-course-card.ts"></script>
     <style>
+      * {
+        box-sizing: border-box;
+      }
+
       body {
-        height: 100vh;
-        place-content: center;
-        place-items: center;
         font-family: sans-serif;
         margin: 0;
-      }
-
-      .container {
-        border: solid 3px black;
-        padding: 40px;
-        border-radius: 20px;
-        box-shadow: 10px 5px 10px 5px rgb(69, 69, 69);
-        margin: auto;
-        
-      }
-      .container-courses{
+        padding: 0;
+        background-color: #414141;
         display: flex;
-        flex-wrap: wrap;
-        
-
-      }
-
-      section#asignaturas {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 1rem;
-        margin-top: 2rem;
         justify-content: center;
       }
 
+      .container {
+        max-width: 1100px;
+        width: 90%;
+        border: solid 3px black;
+        padding: 40px 20px;
+        border-radius: 20px;
+        box-shadow: 10px 5px 10px 5px rgb(69, 69, 69);
+        background-color: rgb(48, 48, 48);
+        margin: 2rem auto;
+      }
+
+      h1 {
+        text-align: center;
+        font-size: 1.8rem;
+        margin-bottom: 1.5rem;
+        color: aliceblue;
+      }
+
+      .search-bar {
+        max-width: 600px;
+        margin: auto;
+        margin-bottom: 2rem;
+        width: 100%;
+      }
+
+      .container-courses {
+        display: flex;
+        justify-content: center;
+      }
+
+      section#asignaturas {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.5rem;
+        width: 100%;
+      }
+
       espe-course-card {
-        flex: 1 1 250px;
+        width: 100%;
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          padding: 20px 10px;
+          
+          place-content: center;
+          place-items: center;
+        }
+
+        h1 {
+          font-size: 1.4rem;
+        }
+
+        .search-bar {
+          width: 50%;
+        }
       }
     </style>
   </head>
@@ -46,12 +82,14 @@
   <body>
     <div class="container">
       <h1>BUSQUEDA ASIGNATURA</h1>
-      <div style="width: 50%;">
+
+      <div class="search-bar">
         <espe-search-input
           theme="#986665"
           placeholder="Busca la asignatura"
         ></espe-search-input>
       </div>
+
       <div class="container-courses">
         <section id="asignaturas">
           <espe-course-card
@@ -62,7 +100,7 @@
             progressColor="green"
             buttonTheme="yellow"
           ></espe-course-card>
-  
+
           <espe-course-card
             data-nombre="Ingeniería"
             title="Ingeniería"
@@ -71,7 +109,7 @@
             progressColor="green"
             buttonTheme="yellow"
           ></espe-course-card>
-  
+
           <espe-course-card
             data-nombre="Administración"
             title="Administración"
@@ -80,7 +118,7 @@
             progressColor="red"
             buttonTheme="green"
           ></espe-course-card>
-  
+
           <espe-course-card
             data-nombre="Computación"
             title="Computación"
@@ -89,7 +127,7 @@
             progressColor="green"
             buttonTheme="yellow"
           ></espe-course-card>
-  
+
           <espe-course-card
             data-nombre="Biotecnología"
             title="Biotecnología"

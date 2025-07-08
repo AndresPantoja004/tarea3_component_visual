@@ -2,86 +2,119 @@ import { LitElement, html, css } from 'lit';
 import { property, state } from 'lit/decorators.js';
 
 export class EspeSearchInput extends LitElement {
-  static styles = css`
-    :host {
-      --espe-primary: #003C71;
-      --espe-success: #006B53;
-      --espe-danger: #E63329;
-      --espe-neutral: #8C8C8C;
-      --input-bg: #fff;
-      --input-border: var(--espe-primary);
-      display: block;
-      font-family: 'Arial', 'Roboto', sans-serif;
-    }
+static styles = css`
+  :host {
+    display: block;
+    font-family: 'Arial', 'Roboto', sans-serif;
 
-    .container {
-      position: relative;
-      width: 100%;
-    }
+    --color-bg: #ffffff;
+    --color-text: #000000;
+    --color-border: var(--input-border, #003C71);
+    --color-placeholder: #8C8C8C;
+    --color-suggestion-bg: white;
+    --color-suggestion-hover: #f0f0f0;
+  }
 
-    input {
-      width: 100%;
-      padding: 10px 0px 10px 12px;
-      border: 2px solid var(--input-border);
-      border-radius: 8px;
-      font-size: 1rem;
-      outline: none;
-    }
+  :host([tema="oscuro"]) {
+    --color-bg: #1e1e1e;
+    --color-text: #f0f0f0;
+    --color-border: #f0f0f0;
+    --color-placeholder: #aaa;
+    --color-suggestion-bg: #2a2a2a;
+    --color-suggestion-hover: #333333;
+  }
 
-    .icon {
-      position: absolute;
-      right: 12px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: var(--espe-primary);
+  @media (prefers-color-scheme: dark) {
+    :host(:not([tema])) {
+      --color-bg: #1e1e1e;
+      --color-text: #f0f0f0;
+      --color-border: #f0f0f0;
+      --color-placeholder: #aaa;
+      --color-suggestion-bg: #2a2a2a;
+      --color-suggestion-hover: #333333;
     }
+  }
 
-    ul.suggestions {
-      list-style: none;
-      margin: 4px 0 0;
-      padding: 0;
-      border: 1px solid var(--input-border);
-      border-radius: 8px;
-      max-height: 160px;
-      overflow-y: auto;
-      background: white;
-      z-index: 10;
-      position: absolute;
-      width: 100%;
-    }
+  .container {
+    position: relative;
+    width: 100%;
+  }
 
-    li {
-      padding: 8px 12px;
-      cursor: pointer;
-    }
+  input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 2px solid var(--color-border);
+    border-radius: 8px;
+    font-size: 1rem;
+    outline: none;
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    caret-color: var(--color-border);
+  }
 
-    li:hover {
-      background-color: #f0f0f0;
-    }
+  input::placeholder {
+    color: var(--color-placeholder);
+  }
 
-    .loading {
-      position: absolute;
-      right: 12px;
-      top: 50%;
-      transform: translateY(-50%);
-      animation: spin 1s linear infinite;
-    }
+  .icon {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--color-border);
+  }
 
-    @keyframes spin {
-      from {
-        transform: translateY(-50%) rotate(0deg);
-      }
-      to {
-        transform: translateY(-50%) rotate(360deg);
-      }
+  ul.suggestions {
+    list-style: none;
+    margin: 4px 0 0;
+    padding: 0;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    max-height: 160px;
+    overflow-y: auto;
+    background: var(--color-suggestion-bg);
+    z-index: 10;
+    position: absolute;
+    width: 100%;
+  }
+
+  li {
+    padding: 8px 12px;
+    cursor: pointer;
+    color: var(--color-text);
+  }
+
+  li:hover {
+    background-color: var(--color-suggestion-hover);
+  }
+
+  .loading {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    animation: spin 1s linear infinite;
+    color: var(--color-border);
+  }
+
+  @keyframes spin {
+    from {
+      transform: translateY(-50%) rotate(0deg);
     }
-  `;
+    to {
+      transform: translateY(-50%) rotate(360deg);
+    }
+  }
+`;
+
 
   @property({ type: Boolean }) loading = false;
   @property({ type: Boolean }) disabled = false;
   @property({ type: String }) theme = '#003C71';
   @property({ type: String }) placeholder = 'Buscar...';
   @property({ type: Array }) suggestions: string[] = [];
+  @property({ type: String, reflect: true }) tema?: 'claro' | 'oscuro';
+
 
   @state() private inputValue = '';
   @state() private filtered: string[] = [];
