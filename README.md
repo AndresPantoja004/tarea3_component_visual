@@ -1,124 +1,91 @@
-# 📘 <espe-search-input> – Componente Web
+# Doumentacion de Tarea 3 Grupo 1
+## Componente ESPE Search
+ESPE Search es una interfaz web basada en Lit que permite buscar asignaturas mediante un campo de entrada con sugerencias dinámicas, y visualizar tarjetas informativas con el progreso y detalles de cada asignatura. Este proyecto combina dos componentes personalizados (`<espe-search-input>` y `<espe-course-card>`) y se adapta a la identidad visual de la ESPE.
+## Funcionalidades de los componentes
+### 1. Componente `<espe-search-input>`
+Un campo de búsqueda interactivo con sugerencias automáticas y eventos personalizados.
 
-Componente Web reutilizable desarrollado con LitElement que permite realizar búsquedas con sugerencias en tiempo real, con personalización visual, accesibilidad, eventos personalizados e integración con identidad institucional de la **ESPE**.
+Propiedades:
+- sugerencia-seleccionada: Se dispara al hacer clic en una sugerencia.
+- buscar-enter: Se dispara al presionar Enter.
 
-Autor: Andrés Pantoja
----
+Comportamiento:
+- Filtra las sugerencias dinámicamente.
+- Soporta selección con clic o teclado.
+- Muestra sugerencias debajo del input.
 
-## 🚀 Características
+### 2. Componente `<espe-course-card>`
+Una tarjeta visual para mostrar información de la asignatura buscada (también se muestra en la interfaz gráfica principal)
+Composición:
+- Imagen (placeholder).
+- Título y descripción.
+- Barra de progreso animada.
+- Botón interactivo.
 
-- 🔍 Input de búsqueda con sugerencias filtradas en vivo.
-- 🎨 Personalización de tema (color del borde) y placeholder.
-- ⏳ Estado `loading` con spinner.
-- 🎯 Eventos personalizados para integración avanzada (`sugerencia-seleccionada`, `buscar-enter`).
-- ✅ Accesibilidad (`aria-label`, `tabindex`, `role="search"`).
-- 📱 Responsive, accesible y fácil de integrar.
+## ¿Cómo interáctuan o cuál es su lógica general en la interfaz?
+El sistema está diseñado para facilitar la búsqueda visual e interactiva de asignaturas. El mismo combina un componente de entrada `<espe-search-input>` que gestiona la búsqueda del usuario con un conjunto de tarjetas de asignatura `<espe-course-card>` que se filtran en tiempo real según la entrada del usuario.
 
----
+### Función Inicial: Carga del componente
 
-## 🧩 Uso básico
+El componente <espe-search-input> recibe un arreglo de sugerencias (asignaturas disponibles) mediante la propiedad suggestions. Cada `<espe-course-card>` representa una asignatura y tiene un atributo data-nombre de la cual permite identificarla dentro del input para fines de búsqueda.
 
+
+### Evento del componente: Filtrado dinámico
+
+El usuario comienza a escribir, el componente `<espe-search-input>` actualiza automáticamente la lista de sugerencias visibles, filtrando aquellas que coinciden parcial o totalmente con el nombre a buscar. Al presionar una sugerencia o la tecla Enter, el componente emite un evento personalizado (sugerencia-seleccionada o buscar-enter).
+
+### Resultado: Respuesta al evento
+
+- La lógica de filtrado está implementada en un <script> externo, que escucha los eventos disparados por `<espe-search-input>`.
+- Al capturar el evento, se obtiene el valor seleccionado o ingresado y se compara con los atributos data-nombre de cada tarjeta de curso.
+- Las tarjetas cuyo data-nombre incluye el texto buscado se mantienen visibles (style.display = 'block'), mientras que las que no coinciden se ocultan (style.display = 'none').
+
+### Interacción visual
+
+El componente muestra una animación de carga si el usuario presiona Enter (loading = true) para simular una búsqueda más realista. Luego de 1 segundo, se oculta automáticamente (loading = false). Las tarjetas se mantienen estilizadas con indicadores visuales como colores en la barra de progreso (progressColor) y botones personalizables (buttonTheme).
+
+### Ejemplo HTML de los componentes
+Atributos del componente `<espe-search-input>`
+| Atributo      | Tipo       | Descripción                                      |
+| ------------- | ---------- | ------------------------------------------------ |
+| `theme`       | `string`   | Define el color del borde del campo de entrada.  |
+| `placeholder` | `string`   | Texto guía dentro del campo de búsqueda.         |
+| `suggestions` | `string[]` | Lista de valores sugeridos mientras se escribe.  |
+| `loading`     | `boolean`  | Muestra un ícono de carga cuando está en `true`. |
+| `disabled`    | `boolean`  | Desactiva el campo de entrada si es `true`.      |
 ```html
-<espe-search-input></espe-search-input>
+<!-- Componente de búsqueda -->
+<espe-search-input
+  theme="#986665"
+  placeholder="Busca la asignatura"
+  .suggestions=${["Investigación", "Ingeniería", "Administración", "Computación", "Biotecnología"]}
+></espe-search-input>
 ```
 
-Por defecto:
-- Color institucional `#003C71`.
-- Placeholder: `Buscar...`.
-- Ícono de lupa.
-- Sin sugerencias iniciales.
-
----
-
-## 🎛️ Atributos disponibles
-
-| Atributo       | Tipo       | Descripción                                                       |
-|----------------|------------|-------------------------------------------------------------------|
-| `suggestions`  | `string[]` | Lista de sugerencias. Se pasa desde JavaScript.                  |
-| `theme`        | `string`   | Color HEX para personalizar el borde del input.                  |
-| `disabled`     | `boolean`  | Desactiva el input.                                              |
-| `loading`      | `boolean`  | Muestra ícono de carga (spinner).                               |
-| `placeholder`  | `string`   | Texto del placeholder (ayuda visual en el input).                |
-
----
-
-## 📡 Eventos personalizados
-
-| Evento                   | Descripción                                                                 |
-|--------------------------|-----------------------------------------------------------------------------|
-| `sugerencia-seleccionada` | Se emite al hacer clic en una sugerencia. Devuelve `{ value }`.             |
-| `buscar-enter`            | Se emite al presionar **Enter**. Devuelve `{ value }`.                      |
-
-### Ejemplo:
-
-```js
-const input = document.querySelector('espe-search-input');
-
-input.suggestions = ['Investigación', 'Computación', 'Ingeniería'];
-
-input.addEventListener('sugerencia-seleccionada', e => {
-  console.log('Seleccionado:', e.detail.value);
-});
-
-input.addEventListener('buscar-enter', e => {
-  console.log('Buscar:', e.detail.value);
-});
+Atributos del Componente `<espe-course-card>`
+| Atributo        | Tipo                     | Descripción                                              |
+| --------------- | ------------------------ | -------------------------------------------------------- |
+| `title`         | `string`                 | Título del curso o asignatura.                           |
+| `description`   | `string`                 | Breve descripción del contenido del curso.               |
+| `progress`      | `number`                 | Porcentaje de progreso del curso.                        |
+| `progressColor` | `'green'` \| `'red'`     | Color visual de la barra y la insignia de progreso.      |
+| `buttonTheme`   | `'green'` \| `'yellow'`  | Tema visual del botón "Ver detalles".                    |
+| `data-nombre`   | `string` (atributo HTML) | Usado para comparar en búsquedas y filtrado de tarjetas. |
+```html
+<!-- Tarjetas de asignaturas -->
+<espe-course-card
+  data-nombre="Computación"
+  title="Computación"
+  description="💻 Fundamentos y algoritmos"
+  progress="50"
+  progressColor="green"
+  buttonTheme="yellow"
+></espe-course-card>
 ```
-
----
-
-## 🧪 Ejemplos visuales
-
-Las siguientes imágenes muestran el componente en diferentes usos:
-
-| Vista                              | Imagen                                 |
-|------------------------------------|----------------------------------------|
-| 🔹 Por defecto                     | `docs/1-default.png`                   |
-| 🎨 Tema personalizado (`#006B53`) | `docs/2-theme-custom.png`              |
-| ✏️ Placeholder modificado         | `docs/3-placeholder.png`               |
-| 🧠 Con sugerencias                | `docs/4-suggestions.png`               |
-| ✅ Resultado de búsqueda          | `docs/5-result.png`                    |
-
-
-### Componente por defecto
-
-![Default](docs/default.png)
-
-### 2. Tema personalizado
-![Borde Cafe](docs/theme-custom.png)
-
-### 3. Placeholder modificado
-![Placeholder](docs/placeholder.png)
-
-### 4. Uso con sugerencias
-![Sugerencias](docs/suggestions.png)
-
-### 5. Resultado de búsqueda
-![Resultado](docs/result.png)
-
-
----
-
-## 📁 Estructura sugerida del repositorio
-
-```
-espe-search-input/
-├── src/
-│   └── espe-search-input.ts
-├── index.html
-├── README.md
-└── docs/
-    ├── 1-default.png
-    ├── 2-theme-custom.png
-    ├── 3-placeholder.png
-    ├── 4-suggestions.png
-    └── 5-result.png
-```
-
----
-
-## ✅ Recomendaciones
-
-- Integra con el [ESPE UIKit](https://github.com/tu-url-espe-uikit) si aplica.
-- Valida atributos como `theme` para asegurar que sea un color HEX válido.
-- Usa `@property()` para exponer los atributos configurables.
+## Ejemplo de uso en diferentes navegadores
+### Navegador 1
+![Navegador 1]()
+### Navegador 2
+![Navegador 2]()
+### Navegador 3
+![Navegador 3]()
