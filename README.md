@@ -28,7 +28,8 @@ Composición:
 
 ### Ejemplo visual: Card Asignatura
 Aqui podemos ver como se ve nuestra tarjeta visualmente
-![Sugerencias](./docs/tarjeta.png)
+
+![Tarjeta](./docs/tarjeta.png)
 
 
 
