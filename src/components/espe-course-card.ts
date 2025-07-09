@@ -149,6 +149,8 @@ export class EspeCourseCard extends LitElement {
   @property({ type: Number }) progress = 40;
   @property({ type: String }) progressColor: 'red' | 'green' = 'red';
   @property({ type: String }) buttonTheme: 'green' | 'yellow' = 'green';
+  @property({ type: String, reflect: true }) tema?: 'claro' | 'oscuro';
+  @property({ type: String }) imageUrl = '';
 
 
   render() {
