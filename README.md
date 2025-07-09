@@ -32,12 +32,12 @@ Aqui podemos ver como se ve nuestra tarjeta visualmente
 
 ![Tarjeta](./docs/tarjeta.png)
 
-### 🖼️ Soporte de imagen en `<espe-course-card>`
+### Soporte de imagen en `<espe-course-card>`
 
 El componente ahora admite un nuevo atributo llamado `imageUrl`, que permite mostrar una imagen personalizada asociada a cada asignatura.  
 Esta imagen se carga en la parte superior de la tarjeta, mejorando la identidad visual de cada curso.
 
-#### 🔧 Atributo `imageUrl`
+#### Atributo `imageUrl`
 
 | Atributo   | Tipo     | Descripción                                                              |
 |------------|----------|---------------------------------------------------------------------------|
