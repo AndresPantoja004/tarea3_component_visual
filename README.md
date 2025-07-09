@@ -32,7 +32,21 @@ Aqui podemos ver como se ve nuestra tarjeta visualmente
 
 ![Tarjeta](./docs/tarjeta.png)
 
+### 🖼️ Soporte de imagen en `<espe-course-card>`
 
+El componente ahora admite un nuevo atributo llamado `imageUrl`, que permite mostrar una imagen personalizada asociada a cada asignatura.  
+Esta imagen se carga en la parte superior de la tarjeta, mejorando la identidad visual de cada curso.
+
+#### 🔧 Atributo `imageUrl`
+
+| Atributo   | Tipo     | Descripción                                                              |
+|------------|----------|---------------------------------------------------------------------------|
+| `imageUrl` | `string` | URL de la imagen que se mostrará en la parte superior de la tarjeta del curso. |
+
+### Ejemplo visual: Imagen personalizada en la tarjeta
+Cada tarjeta puede mostrar una imagen representativa del curso en la parte superior.
+
+![Tarjeta con imagen](./docs/tarjeta-con-imagen.png)
 
 ## ¿Cómo interáctuan o cuál es su lógica general en la interfaz?
 El sistema está diseñado para facilitar la búsqueda visual e interactiva de asignaturas. El mismo combina un componente de entrada `<espe-search-input>` que gestiona la búsqueda del usuario con un conjunto de tarjetas de asignatura `<espe-course-card>` que se filtran en tiempo real según la entrada del usuario.
