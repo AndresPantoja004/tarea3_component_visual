@@ -32,6 +32,28 @@ Aqui podemos ver como se ve nuestra tarjeta visualmente
 
 ![Tarjeta](./docs/tarjeta.png)
 
+## Comportamiento responsivo
+
+El diseño del componente es completamente responsivo, lo que significa que se adapta automáticamente a diferentes tamaños de pantalla, desde computadoras de escritorio hasta dispositivos móviles.
+
+Esto se logra mediante el uso de `CSS Flexbox/Grid` y unidades relativas (`%`, `vw`, `rem`) en la hoja de estilos del componente. Las tarjetas y el buscador mantienen su funcionalidad y estética tanto en pantallas grandes como pequeñas.
+
+### Ejemplo visual: Vista en escritorio
+Aquí se muestra cómo se ve el componente en una pantalla de escritorio.
+
+![Vista escritorio](./docs/escritorio.png)
+
+### Ejemplo visual: Vista en tablet
+El componente se reorganiza de forma fluida en una pantalla de tamaño intermedio como una tablet.
+
+![Vista tablet](./docs/table.png)
+
+### Ejemplo visual: Vista en móvil
+En pantallas pequeñas como las de celular, el diseño se reorganiza verticalmente para facilitar la lectura y navegación.
+
+![Vista móvil](./docs/celular.png)
+
+
 ### Soporte de imagen en `<espe-course-card>`
 
 El componente ahora admite un nuevo atributo llamado `imageUrl`, que permite mostrar una imagen personalizada asociada a cada asignatura.  
@@ -133,3 +155,5 @@ tiene tema oscuro por ende sale en blanco el componente
 En el tercer navegador que se utilizo fue Microsoft Edge el cual se puede ver que el sistema 
 tiene tema claro por ende sale en blanco el componente
 ![Navegador 3](./docs/edge.png)
+
+
