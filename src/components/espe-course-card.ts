@@ -147,8 +147,8 @@ export class EspeCourseCard extends LitElement {
   @property({ type: String }) title = 'Programación';
   @property({ type: String }) description = 'Diseño e implementación de algoritmos';
   @property({ type: Number }) progress = 40;
-  @property({ type: String }) buttonTheme: 'green' | 'yellow' = 'green';
-  @property({ type: String }) imageUrl = '';
+  @property({ type: String }) progressColor: 'red' | 'green' = 'red';
+  @property({ type: String }) buttonTheme: 'green' | 'yellow' = 'green';
 
 
   render() {
