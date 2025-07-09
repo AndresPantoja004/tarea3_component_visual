@@ -177,8 +177,9 @@ export class EspeCourseCard extends LitElement {
 
 
   render() {
-    const btnClass = this.buttonTheme === 'yellow' ? 'btn yellow' : 'btn green';
-
+    const isGreen = this.progressColor === 'green';
+    const fillColor = isGreen ? '#006B53' : '#E63329';
+    const btnClass = this.buttonTheme === 'yellow' ? 'btn yellow' : 'btn green';
     return html`
       <div class="card">
         <div class="image-placeholder">
