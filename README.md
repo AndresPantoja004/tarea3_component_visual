@@ -16,6 +16,7 @@ Comportamiento:
 
 ### Ejemplo visual: Sugerencias desplegadas
 Al escribir en el campo de búsqueda, se muestran automáticamente sugerencias relacionadas.
+
 ![Sugerencias](./docs/sugerencias.png)
 
 ### 2. Componente `<espe-course-card>`
