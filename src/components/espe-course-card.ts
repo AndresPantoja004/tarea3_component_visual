@@ -8,10 +8,7 @@ export class EspeCourseCard extends LitElement {
     font-family: 'Arial', 'Roboto', sans-serif;
     --card-bg: white;
     --muted-text: #666;
-
-    --btn-green-text: white;
   }
-
 
   .card {
     display: flex;
@@ -67,6 +64,25 @@ export class EspeCourseCard extends LitElement {
     border: 1px solid;
   }
 
+  /* Colores para el badge de progreso */
+  .badge.yellow {
+    background-color: #ffc107;
+    color: #333;
+    border-color: #ffc107;
+  }
+
+  .badge.green {
+    background-color: #28a745;
+    color: white;
+    border-color: #28a745;
+  }
+
+  .badge.red {
+    background-color: #dc3545;
+    color: white;
+    border-color: #dc3545;
+  }
+
 
   .description {
     font-size: 0.9rem;
@@ -101,7 +117,6 @@ export class EspeCourseCard extends LitElement {
     display: block;
   }
 
-
   .btn {
     display: flex;
     justify-content: center;
@@ -116,6 +131,16 @@ export class EspeCourseCard extends LitElement {
     gap: 6px;
   }
 
+  /* Colores para los botones */
+  .btn.yellow {
+    background-color: #ffc107;
+    color: #333;
+  }
+
+  .btn.green {
+    background-color: #28a745;
+    color: white;
+  }
 `;
 
 
@@ -124,8 +149,6 @@ export class EspeCourseCard extends LitElement {
   @property({ type: Number }) progress = 40;
   @property({ type: String }) buttonTheme: 'green' | 'yellow' = 'green';
   @property({ type: String }) imageUrl = '';
-
-
 
 
   render() {
@@ -142,16 +165,16 @@ export class EspeCourseCard extends LitElement {
         <div class="content">
           <div class="title-row">
             <span class="title">${this.title}</span>
-            <span class="badge ">${this.progress} %</span>
+            <span class="badge ${this.progressColor}">${this.progress} %</span>
           </div>
           <div class="progress-bar">
-            <div class="progress-fill" style="width: ${this.progress}%; background-color: black;"></div>
+            <div class="progress-fill" style="width: ${this.progress}%; background-color: ${fillColor};"></div>
           </div>
           <div class="description">${this.description}</div>
         </div>
         <div class="button-area">
           <button class="${btnClass}">
-            Ver detalles 👁️
+            Ver detalles 👁
           </button>
         </div>
       </div>
