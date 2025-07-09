@@ -14,6 +14,10 @@ Comportamiento:
 - Soporta selección con clic o teclado.
 - Muestra sugerencias debajo del input.
 
+### Ejemplo visual: Sugerencias desplegadas
+Al escribir en el campo de búsqueda, se muestran automáticamente sugerencias relacionadas.
+![Sugerencias](./docs/sugerencias.png)
+
 ### 2. Componente `<espe-course-card>`
 Una tarjeta visual para mostrar información de la asignatura buscada (también se muestra en la interfaz gráfica principal)
 Composición:
@@ -21,6 +25,12 @@ Composición:
 - Título y descripción.
 - Barra de progreso animada.
 - Botón interactivo.
+
+### Ejemplo visual: Card Asignatura
+Aqui podemos ver como se ve nuestra tarjeta visualmente
+![Sugerencias](./docs/tarjeta.png)
+
+
 
 ## ¿Cómo interáctuan o cuál es su lógica general en la interfaz?
 El sistema está diseñado para facilitar la búsqueda visual e interactiva de asignaturas. El mismo combina un componente de entrada `<espe-search-input>` que gestiona la búsqueda del usuario con un conjunto de tarjetas de asignatura `<espe-course-card>` que se filtran en tiempo real según la entrada del usuario.
@@ -39,6 +49,11 @@ El usuario comienza a escribir, el componente `<espe-search-input>` actualiza au
 - La lógica de filtrado está implementada en un <script> externo, que escucha los eventos disparados por `<espe-search-input>`.
 - Al capturar el evento, se obtiene el valor seleccionado o ingresado y se compara con los atributos data-nombre de cada tarjeta de curso.
 - Las tarjetas cuyo data-nombre incluye el texto buscado se mantienen visibles (style.display = 'block'), mientras que las que no coinciden se ocultan (style.display = 'none').
+
+### Ejemplo visual: Resultado del filtrado
+Solo se muestran las tarjetas que coinciden con el texto buscado.
+![Filtrado](./docs/filtrado.png)
+
 
 ### Interacción visual
 
@@ -83,9 +98,22 @@ Atributos del Componente `<espe-course-card>`
 ></espe-course-card>
 ```
 ## Ejemplo de uso en diferentes navegadores
-### Navegador 1
-![Navegador 1]()
-### Navegador 2
-![Navegador 2]()
-### Navegador 3
-![Navegador 3]()
+
+En esta sección se muestra cómo se visualiza el componente en diferentes navegadores.  
+El modo claro u oscuro se aplica automáticamente según la preferencia de tema del sistema operativo o navegador del usuario.  
+Por ello, el componente puede mostrarse en modo claro o en modo oscuro dependiendo del entorno en el que se visualice.
+
+### Navegador 1 Google Chrome
+En el primer navegador que se utilizo fue Google Chrome el cual se puede ver que el sistema 
+tiene tema claro por ende sale en blanco el componente
+![Chrome 1](./docs/chrome.png)
+
+### Navegador 2 Opera
+En el segundo navegador que se utilizo fue Opera el cual se puede ver que el sistema 
+tiene tema oscuro por ende sale en blanco el componente
+![Navegador 2](./docs/opera.png)
+
+### Navegador 3 Microsoft Edge
+En el tercer navegador que se utilizo fue Microsoft Edge el cual se puede ver que el sistema 
+tiene tema claro por ende sale en blanco el componente
+![Navegador 3](./docs/edge.png)
