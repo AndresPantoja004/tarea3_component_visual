@@ -2,6 +2,14 @@ import { LitElement, html, css } from 'lit';
 import { property } from 'lit/decorators.js';
 
 export class EspeCourseCard extends LitElement {
+  @property({ type: String }) title = 'Programación';
+  @property({ type: String }) description = 'Diseño e implementación de algoritmos';
+  @property({ type: Number }) progress = 40;
+  @property({ type: String }) progressColor: 'red' | 'green' = 'red';
+  @property({ type: String }) buttonTheme: 'green' | 'yellow' = 'green';
+  @property({ type: String, reflect: true }) tema?: 'claro' | 'oscuro';
+  @property({ type: String }) imageUrl = '';
+
   static styles = css`
   :host {
     display: block;
@@ -10,10 +18,16 @@ export class EspeCourseCard extends LitElement {
     --text-color: #333;
     --muted-text: #666;
     --border-color: #eee;
+    
     --btn-green-bg: #2e7d5f;
     --btn-yellow-bg: #f9be01;
     --btn-yellow-text: #000;
     --btn-green-text: white;
+
+    --badge-yellow-bg: #ffc107;
+    --badge-yellow-text: #333;
+    --badge-red-color: #E63329;
+    --badge-green-color: #006B53;
   }
 
   :host([tema="oscuro"]) {
@@ -55,7 +69,7 @@ export class EspeCourseCard extends LitElement {
     position: absolute;
     top: 10px;
     right: 10px;
-    background-color: var(--btn-green-bg); /* Usando variable para el color */
+    background-color: var(--btn-green-bg);
     border-radius: 50%;
     width: 32px;
     height: 32px;
@@ -89,23 +103,23 @@ export class EspeCourseCard extends LitElement {
     border: 1px solid;
   }
 
-  /* Colores para el badge de progreso (usando colores específicos que pasaste) */
   .badge.yellow {
-    background-color: #ffc107; /* Se mantiene este color específico */
-    color: #333;
-    border-color: #ffc107;
+    background-color: var(--badge-yellow-bg);
+    color: var(--badge-yellow-text);
+    border-color: var(--badge-yellow-bg);
   }
 
   .badge.green {
-    color: #006B53; /* Color específico que proporcionaste */
-    border-color: #006B53;
+    background-color: var(--btn-green-bg);
+    color: var(--badge-green-color);
+    border-color: var(--badge-green-color);
   }
 
   .badge.red {
-    color: #E63329; /* Color específico que proporcionaste */
-    border-color: #E63329;
+    background-color: var(--badge-red-color);
+    color: white;
+    border-color: var(--badge-red-color);
   }
-
 
   .description {
     font-size: 0.9rem;
@@ -116,7 +130,7 @@ export class EspeCourseCard extends LitElement {
   .progress-bar {
     height: 4px;
     border-radius: 4px;
-    background-color: var(--border-color); /* Usando variable para el fondo de la barra */
+    background-color: var(--border-color);
     margin: 6px 0 12px;
     position: relative;
     overflow: hidden;
@@ -155,7 +169,7 @@ export class EspeCourseCard extends LitElement {
     gap: 6px;
   }
 
-  /* Colores para los botones usando las nuevas variables */
+  /* Colores para los botones usando las variables (Consolidado) */
   .btn.green {
     background-color: var(--btn-green-bg);
     color: var(--btn-green-text);
@@ -167,25 +181,17 @@ export class EspeCourseCard extends LitElement {
   }
 `;
 
-  @property({ type: String }) title = 'Programación';
-  @property({ type: String }) description = 'Diseño e implementación de algoritmos';
-  @property({ type: Number }) progress = 40;
-  @property({ type: String }) progressColor: 'red' | 'green' = 'red';
-  @property({ type: String }) buttonTheme: 'green' | 'yellow' = 'green';
-  @property({ type: String, reflect: true }) tema?: 'claro' | 'oscuro';
-  @property({ type: String }) imageUrl = '';
-
-
   render() {
     const isGreen = this.progressColor === 'green';
     const fillColor = isGreen ? '#006B53' : '#E63329';
-    const btnClass = this.buttonTheme === 'yellow' ? 'btn yellow' : 'btn green';
+    const btnClass = this.buttonTheme === 'yellow' ? 'btn yellow' : 'btn green';
+
     return html`
       <div class="card">
         <div class="image-placeholder">
             ${this.imageUrl
-        ? html`<img src="${this.imageUrl}" alt="Imagen del curso" class="card-image" />`
-        : ''}
+            ? html`<img src="${this.imageUrl}" alt="Imagen del curso" class="card-image" />`
+            : ''}
           <div class="options-btn">⋮</div>
         </div>
         <div class="content">
